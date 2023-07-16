@@ -39,15 +39,6 @@ class Order extends Model
         'placed_at'
     ];
 
-
-    // public function products() { // Order pertenece o a Products...
-    //     return $this->morphedByMany(Product::class, 'orderable')->withPivot('quantity');
-    // }
-
-    // public function payouts() { // ...o a Payouts
-    //     return $this->morphedByMany(Payout::class, 'orderable'); # ->withPivot('quantity'); # ¿?
-    // }
-
     public function products() {
         return $this->belongsToMany(Product::class)->withPivot('quantity');
     }

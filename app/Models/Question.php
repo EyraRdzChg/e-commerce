@@ -65,10 +65,6 @@ class Question extends Model
         return $this->belongsToMany(Question::class);
     }
 
-    // public function products() { // Se indica que un User puede tener un conjunto de Products
-    //     return $this->morphMany(Product::class, 'productable');
-    // }
-
     public function products() {
         return $this->hasMany(Product::class);
     }
@@ -77,38 +73,8 @@ class Question extends Model
         return $this->hasMany(Order::class);
     }
 
-    // public function payouts() { // Se indica que un User puede tener un conjunto de Payouts
-    //     return $this->morphMany(Payout::class, 'payoutable');
-    // }
-
     public function payouts() {
         return $this->hasMany(Payout::class);
     }
 
-    //ROLES
-
-    public function isManager(){
-        return $this->manager_since != null
-        && $this->manager_since->lessThanOrEqualTo(now());
-    }
-
-    public function isSupervisor(){
-        return $this->supervisor_since != null
-        && $this->supervisor_since->lessThanOrEqualTo(now());
-    }
-
-    public function isSeller(){
-        return $this->seller_since != null
-        && $this->seller_since->lessThanOrEqualTo(now());
-    }
-
-    public function isAccountant(){
-        return $this->accountant_since != null
-        && $this->accountant_since->lessThanOrEqualTo(now());
-    }
-
-    public function isBuyer(){
-        return $this->accountant_since != null
-        && $this->accountant_since->lessThanOrEqualTo(now());
-    }
 }

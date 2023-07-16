@@ -30,13 +30,10 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        // 'registered_at',
         'seller_since',
-        // 'supervisor_since',
         'manager_since',
         'accountant_since',
         'buyer_sice'
-        //'role',
     ];
 
     /**
@@ -74,9 +71,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Question::class);
     }
 
-    // public function products() { // Se indica que un User puede tener un conjunto de Products
-    //     return $this->morphMany(Product::class, 'productable');
-    // }
 
     public function products() {
         return $this->hasMany(Product::class);
@@ -85,10 +79,6 @@ class User extends Authenticatable
     public function orders() {
         return $this->hasMany(Order::class);
     }
-
-    // public function payouts() { // Se indica que un User puede tener un conjunto de Payouts
-    //     return $this->morphMany(Payout::class, 'payoutable');
-    // }
 
     public function payouts() {
         return $this->hasMany(Payout::class);

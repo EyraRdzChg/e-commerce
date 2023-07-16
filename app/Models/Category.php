@@ -20,10 +20,6 @@ class Category extends Model
         'status',
     ];
 
-    // public function products() { // Se indica que una Category puede tener un conjunto de Products
-    //     return $this->morphMany(Product::class, 'productable');
-    // }
-
     public function products() {
         return $this->hasMany(Product::class);
     }

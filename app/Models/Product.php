@@ -61,13 +61,6 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
-    // public function productable() {
-    //     return $this->morphTo();
-    // }
-
-    // public function orders() {
-    //     return $this->morphToMany(Order::class, 'orderable'); # ->withPivot('quantity'); # Un Product tiene varias Orders relacionadas, pero sin una cantidad en específico.
-    // }
 
     public function orders() {
         return $this->belongsToMany(Order::class)->withPivot('quantity');
