@@ -2,20 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-
-use App\Models\Question;
+use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
-use App\Models\Order;
-use App\Models\Payout;
-use App\Models\role;
+use App\Models\User;
 
-
-class User extends Authenticatable
+class Question extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -29,7 +21,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
         // 'registered_at',
         'seller_since',
         // 'supervisor_since',
@@ -94,8 +85,30 @@ class User extends Authenticatable
         return $this->hasMany(Payout::class);
     }
 
-    public function roles() {
-        return $this->belongsToMany(role::class);
+    //ROLES
+
+    public function isManager(){
+        return $this->manager_since != null
+        && $this->manager_since->lessThanOrEqualTo(now());
     }
 
+    public function isSupervisor(){
+        return $this->supervisor_since != null
+        && $this->supervisor_since->lessThanOrEqualTo(now());
+    }
+
+    public function isSeller(){
+        return $this->seller_since != null
+        && $this->seller_since->lessThanOrEqualTo(now());
+    }
+
+    public function isAccountant(){
+        return $this->accountant_since != null
+        && $this->accountant_since->lessThanOrEqualTo(now());
+    }
+
+    public function isBuyer(){
+        return $this->accountant_since != null
+        && $this->accountant_since->lessThanOrEqualTo(now());
+    }
 }
