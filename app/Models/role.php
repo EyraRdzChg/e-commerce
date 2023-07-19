@@ -20,6 +20,6 @@ class role extends Model
     ];
 
     public function product() {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(Usuario::class, 'role_user', 'role_id', 'user_id');
     }
 }

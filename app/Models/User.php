@@ -29,7 +29,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
         'seller_since',
         'manager_since',
         'accountant_since',
@@ -85,7 +84,9 @@ class User extends Authenticatable
     }
 
     public function roles() {
-        return $this->belongsToMany(role::class);
+
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+
     }
 
 }
